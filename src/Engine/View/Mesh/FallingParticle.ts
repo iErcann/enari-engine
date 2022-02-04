@@ -23,7 +23,7 @@ export class FallingParticle extends THREE.Object3D implements IUpdatable {
     private sizeVariation: boolean;
     private fallDirectionArr: Array<number>;
     static defaultParameter: FallingParticleParameter = {
-        count: 200,
+        count: 2000,
         size: 2,
         sizeVariation: true,
         fallDirection: new Vector3D(-1, -1, -1),
