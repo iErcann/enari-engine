@@ -5,6 +5,6 @@ Implemented source engine movement (bunnyhop, strafe)
 
  
 ### How to compile models
-gltfpack -cc -i .\fps_mine_sketch.glb -o fps_mine_sketch_compressed.glb
+gltfpack -cc -i .\model.glb -o model_c.glb
 
 (will probably never update this repo)
