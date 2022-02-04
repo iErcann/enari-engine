@@ -1,0 +1,34 @@
+{
+    "markers": [
+        {
+            "name": "Switch_Start",
+            "time": -0.033,
+            "frame": 0
+        },
+        {
+            "name": "Switch_End",
+            "time": 2.3,
+            "frame": 70
+        },
+        {
+            "name": "Reload_Start",
+            "time": 2.333,
+            "frame": 71
+        },
+        {
+            "name": "Reload_End",
+            "time": 7.967,
+            "frame": 240
+        },
+        {
+            "name": "Shoot_Start",
+            "time": 8.3,
+            "frame": 250
+        },
+        {
+            "name": "Shoot_End",
+            "time": 12.6,
+            "frame": 379
+        }
+    ]
+}
