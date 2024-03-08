@@ -32,7 +32,6 @@ export class GlobalLoadingManager extends THREE.LoadingManager {
     //   "https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/"
     // );
 
-    console.log("GlobalLoadingManager");
     GlobalLoadingManager.gltfLoader.setMeshoptDecoder(MeshoptDecoder);
     GlobalLoadingManager.gltfLoader.setDRACOLoader(
       GlobalLoadingManager.dracoLoader
@@ -83,7 +82,7 @@ export class GlobalLoadingManager extends THREE.LoadingManager {
     await tpsmesh.load();
     tpsmesh.register(this.loadableMeshs);
 
-    const mapmesh = new MapMesh("collision-world");
+    const mapmesh = new MapMesh();
     await mapmesh.load();
     mapmesh.register(this.loadableMeshs);
     /* 
