@@ -7,13 +7,13 @@ import { SAOPass } from "three/examples/jsm/postprocessing/SAOPass.js";
 
 import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { PlayerWrapper } from "../../Core/PlayerWrapper";
-import { DebugUI } from "../DebugUI";
 import { GameObject } from "../../Core/GameObject";
 import { Vector3D } from "../../Core/Vector";
 import { RenderingConfig } from "../../Interface/utils";
 import { SceneLighting } from "./SceneLighting";
 import { ViewmodelRenderer } from "./ViewmodelRenderer";
 import { PeriodicUpdater } from "../../Core/PeriodicUpdater";
+import { DebugUI } from "../DebugUI";
 
 export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
   public scene: THREE.Scene;
