@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>FPS engine i guess</title>
+  
+  <p id="fps">
+
+  </p>
+  <div
+    style="  height: 100%; width: 100%; position: absolute; top: -50%; background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));">
+  </div>
+
+  <img src="crosshair.png" style=" position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 5%;">
+
+  <style>
+    html,
+    body,
+    #root {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #fps {
+      position: absolute;
+      background: rgba(0, 0, 0, 0);
+      opacity: 100%;
+      top: 0px;
+      left: 20px;
+      font-weight: 400;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: white;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
