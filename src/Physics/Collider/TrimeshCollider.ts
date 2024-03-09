@@ -22,7 +22,7 @@ export class TrimeshCollider extends Actor implements IUpdatable {
     mesh: THREE.Mesh
   ): Ammo.btCollisionShape {
     const trimesh = new AmmoInstance!.btTriangleMesh(true, true);
-    const geometry = mesh.geometry;
+    const geometry = mesh.geometry as THREE.BufferGeometry;
     const vertexPositionArray = geometry.attributes.position.array;
     for (let i = 0; i < geometry.attributes.position.count / 3; i++) {
       trimesh.addTriangle(
@@ -78,7 +78,7 @@ export class TrimeshCollider extends Actor implements IUpdatable {
     size: Vector3D,
     mesh: THREE.Mesh
   ): Ammo.btCollisionShape {
-    const geometry = mesh.geometry;
+    const geometry = mesh.geometry as THREE.BufferGeometry;
     if (!geometry.index) throw new Error("No index");
     const vertexCount = geometry.attributes.position.count;
     const indexCount = geometry.index.count;
@@ -255,7 +255,7 @@ export class TrimeshCollider extends Actor implements IUpdatable {
   ) {
     super(pos, rotation);
     this.mesh = mesh;
-    const geometry: THREE.BufferGeometry = mesh.geometry;
+    const geometry = mesh.geometry as THREE.BufferGeometry;
     const posArray = geometry.attributes.position.array;
     const idxArray = geometry.index?.array;
     const itemSize = geometry.attributes.position.itemSize;
