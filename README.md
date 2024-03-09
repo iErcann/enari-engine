@@ -18,8 +18,12 @@ Explore the game here: [Enari Engine 🔗](https://enari-engine.vercel.app/)
 - **R**: Reload
 
 
+ ## You like this project or want to talk about Three.js games ? 
+Discord  https://discord.gg/aEBXPtFwgU 👀
+
  
  **I updated the project but it has old Three.js dependencies + Ammo.js has a better alternative now (Rapier.js)**
+
  
  ### Map loading
  Can load .glb maps

@@ -11,7 +11,7 @@ import { LoadableMesh } from "./LoadableMesh";
 
 export class MapMesh extends LoadableMesh {
   constructor() {
-    super(`collision-world.glb`, "Map");
+    super(`bad4.glb`, "Map");
   }
 
   public init() {
