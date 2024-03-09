@@ -50,7 +50,7 @@ export abstract class PlayerRenderer implements IUpdatable {
       debugUI.addSeparator();
       const folder = debugUI.addFolder({ title: "Player position" });
       const fov = debugUI
-        .addInput(this, "baseFov")
+        .addInput(this, "baseFov" as any)
         .on("change", () => this.setFov(this.baseFov));
       const x = debugUI.addMonitor(this.player.position, "x", {
         multiline: true,

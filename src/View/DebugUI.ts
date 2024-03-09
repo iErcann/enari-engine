@@ -41,7 +41,7 @@ export class DebugUI extends Pane {
   ): FolderApi {
     const folder = this.addFolder({ title: name });
     for (const [key, value] of Object.entries(object)) {
-      folder.addMonitor(object, key);
+      folder.addMonitor(object, key as any);
     }
     this.addSeparator();
     return folder;
@@ -70,7 +70,7 @@ export class DebugUI extends Pane {
   ) {
     const folder = this.addFolder({ title: name });
     for (const [key, value] of Object.entries(object)) {
-      const inp = folder.addInput(object, key);
+      const inp = folder.addInput(object, key as any);
       if (callback) {
         inp.on("change", callback);
       }
