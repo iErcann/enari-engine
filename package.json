@@ -15,9 +15,10 @@
     "vite": "^5.1.4"
   },
   "dependencies": {
+    "@babel/runtime": "^7.24.0",
     "ammojs-typed": "^1.0.6",
     "ammojs-wasm-typed": "^1.1.0",
-    "three": "^0.122.0",
+    "three": "^0.124.0",
     "three-csm": "^4.2.1",
     "three-nebula": "^10.0.1",
     "tweakpane": "^3.0.2"
