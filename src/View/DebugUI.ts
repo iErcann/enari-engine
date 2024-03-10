@@ -17,7 +17,7 @@ export class DebugUI extends Pane {
     incr?: number
   ): FolderApi {
     const folder = this.addFolder({ title: name });
-    const step = incr ? incr : size.x / 20;
+    const step = 0.001;
     folder.addInput(vector, "x", {
       min: -size.x,
       max: size.x,

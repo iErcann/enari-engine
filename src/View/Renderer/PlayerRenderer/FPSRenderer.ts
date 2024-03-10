@@ -38,17 +38,17 @@ import { lerp } from "../../../Core/MathUtils";
 // TODO: cette classe gère le mouvement de la FPS Mesh
 export class FPSRenderer extends PlayerRenderer implements IUpdatable {
     public handleJump(): void {
-         
+
     }
     protected removeMesh(): void {
-/*         this.viewmodelCamera.traverse((mesh) => {
-            if (mesh instanceof THREE.Mesh) {
-                mesh.geometry.dispose();
-                mesh.material.dispose();
-            };
-            this.viewmodelCamera.remove(mesh);
-        }
-        ) */
+        /*         this.viewmodelCamera.traverse((mesh) => {
+                    if (mesh instanceof THREE.Mesh) {
+                        mesh.geometry.dispose();
+                        mesh.material.dispose();
+                    };
+                    this.viewmodelCamera.remove(mesh);
+                }
+                ) */
         this.viewmodelCamera.children = [];
     }
     show(): void {
@@ -78,8 +78,8 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
     constructor(player: Player) {
         super(player);
         this.viewmodelCamera = this.legacyViewmodel ? this.camera : this.game.renderer.viewmodelRenderer.camera;
-        this.playerLight = new THREE.PointLight(0xffffff, 20, 100);
-        this.playerLight.position.add(new Vector3D(1, 1, 1))
+        this.playerLight = new THREE.PointLight(0xE12121, 10, 100);
+        this.playerLight.position.add(new Vector3D(3.565, -5, 1))
         this.playerLight.castShadow = true;
         const fpsMesh = <FPSMesh>Game.getInstance().globalLoadingManager.loadableMeshs.get("Usp")!.clone();
         this.initParticleEmitter();
@@ -89,13 +89,16 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
             const debugUI: DebugUI = this.game.renderer.debugUI;
             debugUI.addVector(this.weaponOffset, "Viewmodel Offset", new Vector3D(2, 4, 2), 0.01);
             debugUI.addVector(this.weaponRotation, "Viewmodel Rotation", new Vector3D(Math.PI, Math.PI, Math.PI));
+
+            debugUI.addMesh(this.playerLight, "Player PointLight")
+            debugUI.addObject(this.playerLight.color, "Player PointLight Color");
         }
     }
 
     public setMesh(mesh: LoadableMesh): void {
         this.removeMesh();
         this.fpsMesh = mesh as FPSMesh;
-       // this.fpsMesh.addLight(this.playerLight);
+        this.fpsMesh.addLight(this.playerLight);
         this.fpsMesh.init(); // shadow
         this.addToRenderer();
         this.initViewmodelPosition();
@@ -111,7 +114,7 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
             this.fpsMesh.update(dt);
             // Viewmodel update
             const fpsCameraManager = this.playerCameraManager as FPSCameraManager;
-            const bobbingAmount = 0.0002  ;
+            const bobbingAmount = 0.0002;
             if (fpsCameraManager.isRotating) {
                 // TODO: make the isRotating thing in abstract base 
                 const rotationBobbing = new Vector2D(fpsCameraManager.rotationDelta.x, fpsCameraManager.rotationDelta.y).multiplyScalar(bobbingAmount);
@@ -126,7 +129,7 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
             this.weaponBobbingAcc.y = lerp(this.weaponBobbingAcc.y, 0, bobbingLerpAmount);
             this.fpsMesh.mesh.rotation.x = -this.weaponBobbingAcc.x + this.weaponRotation.x;
             this.fpsMesh.mesh.rotation.y = -this.weaponBobbingAcc.y + this.weaponRotation.y
-            this.fpsMesh.mesh.rotation.z = -this.weaponBobbingAcc.y  ;
+            this.fpsMesh.mesh.rotation.z = -this.weaponBobbingAcc.y;
 
             this.fpsMesh.mesh.position.x = this.weaponOffset.x + this.fpsMesh.viewmodelOffset.x;
             this.fpsMesh.mesh.position.y = this.weaponOffset.y + this.fpsMesh.viewmodelOffset.y + Math.sin(this.moveEffect.y) / 50;
