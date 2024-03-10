@@ -64,7 +64,6 @@ export abstract class PlayerRenderer implements IUpdatable {
         multiline: true,
         lineCount: 1,
       });
-      const v = debugUI.monitorObject(this.player.velocity, "Player velocity");
       const magn = debugUI.addMonitor(this.player, "currentSpeedMagnitude", {
         title: "Player current speed magnitude",
       });
@@ -77,7 +76,6 @@ export abstract class PlayerRenderer implements IUpdatable {
       folder.add(x);
       folder.add(y);
       folder.add(z);
-      folder.add(v);
       folder.add(magn);
       folder.add(deceleration);
       debugUI.addSeparator();
