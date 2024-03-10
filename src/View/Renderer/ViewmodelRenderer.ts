@@ -8,7 +8,7 @@ export class ViewmodelRenderer {
     private ambientLight: THREE.AmbientLight;
     public scene: THREE.Scene;
     private spotLight: THREE.SpotLight;
-    constructor(){
+    constructor() {
         this.ambientLight = new THREE.AmbientLight();
         this.scene = new THREE.Scene();
         this.scene.add(this.ambientLight);
@@ -20,15 +20,15 @@ export class ViewmodelRenderer {
         this.camera = PlayerRenderer.createCamera(60);
         this.scene.add(this.camera);
     }
-    public addDebugUI(renderer: Renderer){
-        renderer.debugUI.addInput(this.camera, "fov");
+    public addDebugUI(renderer: Renderer) {
+        renderer.debugUI.addMesh(this.camera);
     }
 
-    public render(renderer: Renderer, dt: number){
+    public render(renderer: Renderer, dt: number) {
         renderer.clearDepth();
         renderer.render(this.scene, this.camera);
         renderer.camera.updateProjectionMatrix();
-        this.spotLight.target.rotation.z += dt*100;
+        this.spotLight.target.rotation.z += dt * 100;
         console.log(this.spotLight.rotation)
     }
 }

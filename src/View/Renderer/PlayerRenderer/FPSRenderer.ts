@@ -69,6 +69,8 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
     private legacyViewmodel = true;
     public fpsMesh!: FPSMesh;
     private recoilEffect = 0;
+
+    private bobbingAmount = 0.0002;
     private moveEffect = Vector3D.ZERO();
     private tempEmitter: Emitter;
     public weaponOffset = Vector3D.ZERO();
@@ -89,9 +91,15 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
             const debugUI: DebugUI = this.game.renderer.debugUI;
             debugUI.addVector(this.weaponOffset, "Viewmodel Offset", new Vector3D(2, 4, 2), 0.01);
             debugUI.addVector(this.weaponRotation, "Viewmodel Rotation", new Vector3D(Math.PI, Math.PI, Math.PI));
+            debugUI.addInput(this, "bobbingAmount" as any, {
+                min: 0.0001,
+                max: 0.01,
+            }
+            );
 
             debugUI.addMesh(this.playerLight, "Player PointLight")
             debugUI.addObject(this.playerLight.color, "Player PointLight Color");
+
         }
     }
 
@@ -114,10 +122,9 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
             this.fpsMesh.update(dt);
             // Viewmodel update
             const fpsCameraManager = this.playerCameraManager as FPSCameraManager;
-            const bobbingAmount = 0.0002;
             if (fpsCameraManager.isRotating) {
                 // TODO: make the isRotating thing in abstract base 
-                const rotationBobbing = new Vector2D(fpsCameraManager.rotationDelta.x, fpsCameraManager.rotationDelta.y).multiplyScalar(bobbingAmount);
+                const rotationBobbing = new Vector2D(fpsCameraManager.rotationDelta.x, fpsCameraManager.rotationDelta.y).multiplyScalar(this.bobbingAmount);
                 this.weaponBobbingAcc.add(new Vector3D(rotationBobbing.y, rotationBobbing.x, 0));
             }
 
