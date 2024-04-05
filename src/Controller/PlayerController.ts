@@ -1,66 +1,64 @@
-import { Player } from '../Core/Player';
-import { Vector3D } from '../Core/Vector';
-import { HitscanResult } from '../Interface/utils';
-import { Controller } from './Controller';
-
+import { Player } from "../Core/Player";
+import { Vector3D } from "../Core/Vector";
+import { HitscanResult } from "../Interface/utils";
+import { Controller } from "./Controller";
 
 export class PlayerController extends Controller {
-    update(dt: number) {
-        // gérer inputs 
-    }
+  update(dt: number) {
+    // gérer inputs
+  }
 
-    constructor(controlledPlayer: Player) {
-        super(controlledPlayer);
-    }
+  constructor(controlledPlayer: Player) {
+    super(controlledPlayer);
+  }
 
-    public getPlayer(): Player {
-        return this.controlledPawn as Player;
-    }
-    private updateSpeed(speed: number): number {
-        const player = this.getPlayer();
-        return speed;
-        //return player.isOnGround ? speed : speed / 2;
+  public getPlayer(): Player {
+    return this.controlledPawn as Player;
+  }
+  private updateSpeed(speed: number): number {
+    const player = this.getPlayer();
+    return speed;
+    //return player.isOnGround ? speed : speed / 2;
+  }
+  public moveForward(speed: number, dt: number): void {
+    // Bouger le perso en fonction de sa looking direction
+    const player = this.getPlayer();
+    speed = this.updateSpeed(speed);
+    player.moveForward();
+  }
 
-    }
-    public moveForward(speed: number, dt: number): void {
-        // Bouger le perso en fonction de sa looking direction 
-        const player = this.getPlayer();
-        speed = this.updateSpeed(speed);
-        player.moveForward();
-    }
+  public moveBackward(speed: number, dt: number) {
+    const player = this.getPlayer();
+    speed = this.updateSpeed(speed);
 
-    public moveBackward(speed: number, dt: number) {
-        const player = this.getPlayer();
-        speed = this.updateSpeed(speed);
+    player.moveBackward();
+  }
+  public moveLeft(speed: number, dt: number) {
+    const player = this.getPlayer();
+    speed = this.updateSpeed(speed);
 
-        player.moveBackward();
-    }
-    public moveLeft(speed: number, dt: number) {
-        const player = this.getPlayer();
-        speed = this.updateSpeed(speed);
+    player.moveLeft();
+  }
+  public moveRight(speed: number, dt: number) {
+    const player = this.getPlayer();
+    speed = this.updateSpeed(speed);
 
-        player.moveLeft();
+    player.moveRight();
+  }
+  public jump(): boolean {
+    const player = this.getPlayer();
+    const canJump = player.canJump();
+    if (canJump) {
+      player.jump();
     }
-    public moveRight(speed: number, dt: number) {
-        const player = this.getPlayer();
-        speed = this.updateSpeed(speed);
-
-        player.moveRight();
+    return canJump;
+  }
+  public shoot(): HitscanResult | undefined {
+    const player = this.getPlayer();
+    const canShoot: boolean = player.canShoot();
+    if (canShoot) {
+      return player.shoot(); // reset last shoot timestamp
     }
-    public jump(): boolean {
-        const player = this.getPlayer();
-        const canJump = player.canJump(); 
-        if (player.canJump()) {
-            player.jump();
-        }
-        return canJump;
-    }
-    public shoot(): HitscanResult | undefined {
-        const player = this.getPlayer();
-        const canShoot: boolean = player.canShoot();
-        if (canShoot) {
-            return player.shoot(); // reset last shoot timestamp
-        }
-        return undefined;
-    }
+    return undefined;
+  }
 }
