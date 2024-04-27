@@ -11,12 +11,15 @@ export class GroundRenderer extends GroundCollider implements IUpdatable {
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(400, 400);
-    const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(this.size.x, this.size.y, this.size.z);
-    const material: THREE.MeshBasicMaterial = new THREE.MeshPhongMaterial({
-      map: texture
+    const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(
+      this.size.x,
+      this.size.y,
+      this.size.z
+    );
+    const material: THREE.MeshPhongMaterial = new THREE.MeshPhongMaterial({
+      map: texture,
     });
     const cube: THREE.Mesh = new THREE.Mesh(geometry, material);
-
 
     cube.castShadow = true;
     cube.receiveShadow = true;

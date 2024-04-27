@@ -117,7 +117,7 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
 		this.debugUI.addInput(ssaoPass, 'maxDistance', { min: 0.01 , max: 0.3  });
  */
 
-    const saoPass = new SAOPass(this.scene, this.camera, false, false);
+    /*     const saoPass = new SAOPass(this.scene, this.camera, false, false);
     this.composer.addPass(saoPass);
     this.debugUI.addInput(saoPass.params, "saoBias");
     this.debugUI.addInput(saoPass.params, "saoIntensity");
@@ -127,7 +127,7 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
     this.debugUI.addInput(saoPass.params, "saoBlur");
     this.debugUI.addInput(saoPass.params, "saoBlurRadius");
     this.debugUI.addInput(saoPass.params, "saoBlurStdDev");
-    this.debugUI.addInput(saoPass.params, "saoBlurDepthCutoff");
+    this.debugUI.addInput(saoPass.params, "saoBlurDepthCutoff"); */
   }
   private setSkybox(): void {
     const loader = new THREE.TextureLoader();

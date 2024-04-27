@@ -1,11 +1,9 @@
 import * as THREE from "three";
-import { SkeletonUtils } from "three/examples/jsm/utils/SkeletonUtils";
 import { IUpdatable } from "../../Interface/IUpdatable";
 import {
   AnimationMarker,
   AnimationMarkerDelimiter,
 } from "../../Interface/utils";
-import { FPSMesh } from "./FPSMesh";
 import { GlobalLoadingManager } from "./GlobalLoadingManager";
 import { LoadableMesh } from "./LoadableMesh";
 

@@ -125,7 +125,7 @@ export abstract class PlayerRenderer implements IUpdatable {
         this.player.capsuleDimension.y * 2,
         this.player.capsuleDimension.x
       );
-      const material: THREE.MeshBasicMaterial = new THREE.MeshPhongMaterial({
+      const material: THREE.MeshPhongMaterial = new THREE.MeshPhongMaterial({
         color: "#123121",
         wireframe: false,
       });

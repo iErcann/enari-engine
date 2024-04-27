@@ -1,3 +1,4 @@
+import * as THREE from "three";
 import { FolderApi, Pane } from "tweakpane";
 import { Vector3D } from "../Core/Vector";
 
