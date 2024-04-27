@@ -25,8 +25,8 @@ export class TQuaternion extends THREE.Quaternion {
   }
 
   public toVector3D(): Vector3D {
-    const vec3 = new THREE.Euler().setFromQuaternion(this).toVector3();
-    return new Vector3D(vec3.x, vec3.y, vec3.z);
+    const euler = new THREE.Euler().setFromQuaternion(this, "XYZ");
+    return new Vector3D(euler.x, euler.y, euler.z);
   }
 }
 

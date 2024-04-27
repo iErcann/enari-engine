@@ -11,7 +11,7 @@ import { LoadableMesh } from "./LoadableMesh";
 
 export class MapMesh extends LoadableMesh {
   constructor() {
-    super(`bad4.glb`, "Map");
+    super(`modular_environment.glb`, "Map");
   }
 
   public init() {

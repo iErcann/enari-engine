@@ -55,93 +55,6 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
     document.body.appendChild(this.domElement);
   }
 
-  private setSky(): void {
-    // https://github.com/mrdoob/three.js/blob/master/examples/webgl_shaders_sky.html
-    this.sky = new Sky();
-
-    this.sky.scale.setScalar(450000);
-
-    this.addToRenderer(this.sky);
-
-    const effectController = {
-      turbidity: 1,
-      rayleigh: 0.09,
-      mieCoefficient: 0.005,
-      mieDirectionalG: 0.7,
-      elevation: 64,
-      azimuth: 180,
-      exposure: this.toneMappingExposure,
-    };
-    const sun = new Vector3D();
-    const guiChanged = (): void => {
-      const uniforms = this.sky.material.uniforms;
-      uniforms["turbidity"].value = effectController.turbidity;
-      uniforms["rayleigh"].value = effectController.rayleigh;
-      uniforms["mieCoefficient"].value = effectController.mieCoefficient;
-      uniforms["mieDirectionalG"].value = effectController.mieDirectionalG;
-
-      const degToRad = (degrees) => {
-        var pi = Math.PI;
-        return degrees * (pi / 180);
-      };
-
-      const phi = degToRad(90 - effectController.elevation);
-      const theta = degToRad(effectController.azimuth);
-
-      sun.setFromSphericalCoords(1, phi, theta);
-
-      uniforms["sunPosition"].value.copy(sun);
-
-      this.toneMappingExposure = effectController.exposure;
-      //this.render(this.scene, this.camera);
-    };
-
-    const folder = this.debugUI.addFolder({ title: "Sky shader" });
-    folder
-      .addInput(effectController, "turbidity", {
-        min: 0,
-        max: 20,
-      })
-      .on("change", guiChanged);
-    folder
-      .addInput(effectController, "rayleigh", {
-        min: 0,
-        max: 4,
-      })
-      .on("change", guiChanged);
-    folder
-      .addInput(effectController, "mieCoefficient", {
-        min: 0,
-        max: 0.1,
-      })
-      .on("change", guiChanged);
-    folder
-      .addInput(effectController, "mieDirectionalG", {
-        min: 0,
-        max: 1,
-      })
-      .on("change", guiChanged);
-    folder
-      .addInput(effectController, "elevation", {
-        min: 0,
-        max: 90,
-      })
-      .on("change", guiChanged);
-    folder
-      .addInput(effectController, "azimuth", {
-        min: -180,
-        max: 180,
-      })
-      .on("change", guiChanged);
-    folder
-      .addInput(effectController, "exposure", {
-        min: 0,
-        max: 1,
-      })
-      .on("change", guiChanged);
-    guiChanged();
-  }
-
   private createDebugCamera() {
     this.debugCamera = new THREE.PerspectiveCamera();
     this.debugCamera.aspect = window.innerWidth / window.innerHeight;
@@ -166,7 +79,6 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
       if (this.renderingConfig.debugCamera) {
         this.createDebugCamera();
       }
-      this.setSky();
     }
     this.currentPlayer = player;
   }
