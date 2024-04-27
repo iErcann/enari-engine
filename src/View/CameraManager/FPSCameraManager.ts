@@ -21,15 +21,17 @@ export class FPSCameraManager extends CameraManager {
 
   public update(dt: number) {
     super.update(dt);
-    this.camera.position.set(this.player.position.x, this.player.position.y + this.player.eyeOffsetY, this.player.position.z);
+    this.camera.position.set(
+      this.player.position.x,
+      this.player.position.y + this.player.eyeOffsetY,
+      this.player.position.z
+    );
     this.player.lookingDirection = this.getDirection();
 
-    // TODO: move the recoil stuff to player and just apply it visually here 
+    // TODO: move the recoil stuff to player and just apply it visually here
     if (this.player.canResetRecoil() && this.recoilIndex > 1) {
       this.recoilIndex--;
     }
-
-
   }
 
   public onMouseMove(event) {
@@ -54,7 +56,9 @@ export class FPSCameraManager extends CameraManager {
   }
   public getDirection(): Vector3D {
     var direction = new Vector3D(0, 0, -1);
-    return new THREE.Vector3(0, 0, 0).copy(direction).applyQuaternion(this.camera.quaternion) as Vector3D;
+    return new THREE.Vector3(0, 0, 0)
+      .copy(direction)
+      .applyQuaternion(this.camera.quaternion) as Vector3D;
   }
   private yawDirection = -1;
   private recoilIndex = 1;
@@ -62,19 +66,20 @@ export class FPSCameraManager extends CameraManager {
   // f\left(x\right)=cx\exp\left(1-cx\right)
   //https://www.desmos.com/calculator/l9wr4aamzc?lang=fr
   public createRecoil(): void {
-    this.yawDirection = Math.random() <= .1 ? -this.yawDirection : this.yawDirection;
+    this.yawDirection =
+      Math.random() <= 0.1 ? -this.yawDirection : this.yawDirection;
 
     const pitchDampingFunction = (x): number => {
       const c = 1.2;
       return c * x * Math.exp(1 - c * x);
-    }
+    };
     const yawDampingFunction = (x): number => {
       const c = 0.6;
       let x2 = 5 - (x % 5);
       return c * x2 * Math.exp(1 - c * x2);
-    }
+    };
     const pitch = pitchDampingFunction(this.recoilIndex / 2) / 30;
-    const yaw = yawDampingFunction(this.recoilIndex) / 50 * this.yawDirection;
+    const yaw = (yawDampingFunction(this.recoilIndex) / 50) * this.yawDirection;
     const recoil = new Vector3D(pitch, yaw, 0);
     this.recoilAccumulation.add(recoil);
 

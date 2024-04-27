@@ -1,29 +1,29 @@
-import * as THREE from "three";
-import { TQuaternion } from "../../Core/Quaternion";
-import { Vector2D, Vector3D } from "../../Core/Vector";
-import { Game } from "../../Game";
-import { CubeCollider } from "../../Physics/Collider/CubeCollider";
-import { TrimeshCollider } from "../../Physics/Collider/TrimeshCollider";
-import { CubeRenderer } from "../Renderer/CubeRenderer";
-import { TrimeshRenderer } from "../Renderer/TrimeshRenderer";
-import { FakeSpotLight } from "./FakeSpotLight";
-import { LoadableMesh } from "./LoadableMesh";
+import * as THREE from 'three'
+import { TQuaternion } from '../../Core/Quaternion'
+import { Vector2D, Vector3D } from '../../Core/Vector'
+import { Game } from '../../Game'
+import { CubeCollider } from '../../Physics/Collider/CubeCollider'
+import { TrimeshCollider } from '../../Physics/Collider/TrimeshCollider'
+import { CubeRenderer } from '../Renderer/CubeRenderer'
+import { TrimeshRenderer } from '../Renderer/TrimeshRenderer'
+import { FakeSpotLight } from './FakeSpotLight'
+import { LoadableMesh } from './LoadableMesh'
 
 export class MapMesh extends LoadableMesh {
   constructor() {
-    super(`modular_environment.glb`, "Map");
+    super(`bad4.glb`, 'Map')
   }
 
   public init() {
-    super.init();
+    super.init()
   }
   public addPhysics(game: Game): void {
-    const removedMeshs: Array<THREE.Object3D> = new Array<THREE.Object3D>();
+    const removedMeshs: Array<THREE.Object3D> = new Array<THREE.Object3D>()
     this.mesh.traverse((child) => {
-      if (child.name.substr(0, 4) === "Spot") {
-        const pos = child.position.clone();
-        const height = 32;
-        pos.y -= height / 2;
+      if (child.name.substr(0, 4) === 'Spot') {
+        const pos = child.position.clone()
+        const height = 32
+        pos.y -= height / 2
 
         const faker = new FakeSpotLight({
           color1: new THREE.Color(0x512578),
@@ -32,41 +32,33 @@ export class MapMesh extends LoadableMesh {
           height: height,
           radius: 20,
           attenuation: 35,
-        });
-        game.renderer.addToRenderer(faker);
+        })
+        game.renderer.addToRenderer(faker)
       } else if ((child as any).isMesh) {
-        let mesh = child as THREE.Mesh;
-        let mat = mesh.material as THREE.MeshStandardMaterial;
+        let mesh = child as THREE.Mesh
+        let mat = mesh.material as THREE.MeshStandardMaterial
         //mat.normalScale = new Vector2D(220, 220);
-        const quat: THREE.Quaternion = mesh.getWorldQuaternion(mesh.quaternion);
-        const rotation = new TQuaternion(
-          quat.x,
-          quat.y,
-          quat.z,
-          quat.w
-        ).toVector3D();
-        const pos = mesh.getWorldPosition(mesh.position.clone()) as Vector3D;
-        const scale = mesh
-          .getWorldScale(mesh.scale)
-          .clone()
-          .multiplyScalar(1) as Vector3D;
+        const quat: THREE.Quaternion = mesh.getWorldQuaternion(mesh.quaternion)
+        const rotation = new TQuaternion(quat.x, quat.y, quat.z, quat.w).toVector3D()
+        const pos = mesh.getWorldPosition(mesh.position.clone()) as Vector3D
+        const scale = mesh.getWorldScale(mesh.scale).clone().multiplyScalar(1) as Vector3D
         //const mass = 0; Math.random() > 0.5 ? Math.random() * 10 : 0;
-        const isDynamic = false; //= mass != 0;
-        let cube: TrimeshCollider | undefined = undefined;
+        const isDynamic = false //= mass != 0;
+        let cube: TrimeshCollider | undefined = undefined
         // If a child is dynamic, remove it from the mesh and create its own renderer.
         if (isDynamic) {
-          cube = new TrimeshRenderer(mesh, pos, rotation, scale, 100);
-          game.addToRenderer((cube as TrimeshRenderer).mesh);
-          removedMeshs.push(mesh);
+          cube = new TrimeshRenderer(mesh, pos, rotation, scale, 100)
+          game.addToRenderer((cube as TrimeshRenderer).mesh)
+          removedMeshs.push(mesh)
         } else {
-          cube = new TrimeshCollider(mesh, pos, rotation, scale, 0);
+          cube = new TrimeshCollider(mesh, pos, rotation, scale, 0)
         }
-        game.actors.push(cube);
-        game.addToWorld(cube);
+        game.actors.push(cube)
+        game.addToWorld(cube)
       }
-    });
+    })
     for (let i = 0; i < removedMeshs.length; i++) {
-      this.mesh.remove(removedMeshs[i]);
+      this.mesh.remove(removedMeshs[i])
     }
   }
 
@@ -103,8 +95,8 @@ export class MapMesh extends LoadableMesh {
       }
     } */
   public clone(): MapMesh {
-    const loadableMesh = new MapMesh();
-    loadableMesh.setMesh(this.cloneMesh());
-    return loadableMesh;
+    const loadableMesh = new MapMesh()
+    loadableMesh.setMesh(this.cloneMesh())
+    return loadableMesh
   }
 }
