@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@tweakpane/core": "^1.0.2",
-    "@types/three": "^0.129.0",
+    "@types/three": "^0.164.0",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
   },
@@ -18,7 +18,7 @@
     "@babel/runtime": "^7.24.0",
     "ammojs-typed": "^1.0.6",
     "ammojs-wasm-typed": "^1.1.0",
-    "three": "^0.124.0",
+    "three": "^0.164.0",
     "three-csm": "^4.2.1",
     "three-nebula": "^10.0.1",
     "tweakpane": "^3.0.2"

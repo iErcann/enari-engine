@@ -1,57 +1,31 @@
-// Reference: https://github.com/swift502/Sketchbook/blob/master/src/ts/world/Sky.ts
+import { Sky } from "three/examples/jsm/objects/Sky.js";
 import * as THREE from "three";
-import { PeriodicUpdater } from "../../Core/PeriodicUpdater";
 import { Vector3D } from "../../Core/Vector";
 import { IUpdatable } from "../../Interface/IUpdatable.js";
-import CSM from "../LightExtra/CSM.js";
-import { SkyShader } from "../Shader/SkyShader.js";
 import { Renderer } from "./Renderer.js";
+import { PeriodicUpdater } from "../../Core/PeriodicUpdater.js";
 
 export class SkyLight extends THREE.Object3D implements IUpdatable {
   public sunPosition: Vector3D = Vector3D.ZERO();
-  public csm: CSM;
   private directionalLight: THREE.DirectionalLight;
-
-  private _phi: number = 50;
-  private _theta: number = 145;
-
   private hemiLight: THREE.HemisphereLight;
-  private maxHemiIntensity: number = 0.7;
-  private minHemiIntensity: number = 4.41;
-
-  private skyMesh!: THREE.Mesh;
-  private skyMaterial!: THREE.ShaderMaterial;
-
   private renderer: Renderer;
+  private sky!: Sky;
 
   constructor(renderer: Renderer) {
     super();
-    const ambientFolder = renderer.debugUI.addFolder({ title: "Ambient" });
     this.renderer = renderer;
     const ambientLight = new THREE.AmbientLight();
-    ambientLight.intensity = 0.08;
-    const ambient = this.renderer.debugUI.addInput(ambientLight, "intensity", {
-      title: "Ambient",
-    });
-    ambientFolder.add(ambient);
+    ambientLight.intensity = 0.78;
     this.renderer.addToRenderer(ambientLight);
 
     // Ambient light
     this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 2.0);
-    this.refreshHemiIntensity();
     this.hemiLight.color.setHSL(0.59, 0.4, 0.6);
     this.hemiLight.groundColor.setHSL(0.095, 0.2, 0.75);
     this.renderer.addToRenderer(this.hemiLight);
-    let splitsCallback = (amount, near, far, target) => {
-      let arr = [];
 
-      for (let i = amount - 1; i >= 0; i--) {
-        target.push(Math.pow(1 / 4, i));
-      }
-
-      return arr;
-    };
-    this.directionalLight = new THREE.DirectionalLight(0xfeaaee, 1.2);
+    this.directionalLight = new THREE.DirectionalLight(0xfeaaee, 3.2);
     this.directionalLight.shadow.camera.near = 0.1;
     this.directionalLight.shadow.camera.far = 500;
     this.directionalLight.shadow.camera.right = 150;
@@ -64,15 +38,10 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
     this.directionalLight.shadow.bias = -0.001;
     this.directionalLight.castShadow = true;
     this.directionalLight.shadow.autoUpdate = false;
-    const directionnalLightHelper = new THREE.DirectionalLightHelper(
-      this.directionalLight
-    );
-    //this.renderer.addToRenderer(directionnalLightHelper);
-    //this.renderer.addToRenderer(new THREE.CameraHelper(this.directionalLight.shadow.camera))
 
     this.renderer.addToRenderer(this.directionalLight);
     this.renderer.addToRenderer(this.directionalLight.target);
-    this.renderer.debugUI.addVector(this.sunPosition);
+
     this.lightUpdater = new PeriodicUpdater(
       1000,
       () => {
@@ -80,6 +49,94 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
       },
       this
     );
+    this.setSky();
+  }
+
+  private setSky(): void {
+    // https://github.com/mrdoob/three.js/blob/master/examples/webgl_shaders_sky.html
+    this.sky = new Sky();
+
+    this.sky.scale.setScalar(450000);
+
+    this.renderer.addToRenderer(this.sky);
+
+    const effectController = {
+      turbidity: 1,
+      rayleigh: 0.09,
+      mieCoefficient: 0.005,
+      mieDirectionalG: 0.7,
+      elevation: 64,
+      azimuth: 180,
+      exposure: this.renderer.toneMappingExposure,
+    };
+    const sun = new Vector3D();
+    const guiChanged = (): void => {
+      const uniforms = this.sky.material.uniforms;
+      uniforms["turbidity"].value = effectController.turbidity;
+      uniforms["rayleigh"].value = effectController.rayleigh;
+      uniforms["mieCoefficient"].value = effectController.mieCoefficient;
+      uniforms["mieDirectionalG"].value = effectController.mieDirectionalG;
+
+      const degToRad = (degrees) => {
+        var pi = Math.PI;
+        return degrees * (pi / 180);
+      };
+
+      const phi = degToRad(90 - effectController.elevation);
+      const theta = degToRad(effectController.azimuth);
+
+      sun.setFromSphericalCoords(1, phi, theta);
+
+      uniforms["sunPosition"].value.copy(sun);
+
+      this.renderer.toneMappingExposure = effectController.exposure;
+      //this.render(this.scene, this.camera);
+    };
+
+    const folder = this.renderer.debugUI.addFolder({ title: "Sky shader" });
+    folder
+      .addInput(effectController, "turbidity", {
+        min: 0,
+        max: 20,
+      })
+      .on("change", guiChanged);
+    folder
+      .addInput(effectController, "rayleigh", {
+        min: 0,
+        max: 4,
+      })
+      .on("change", guiChanged);
+    folder
+      .addInput(effectController, "mieCoefficient", {
+        min: 0,
+        max: 0.1,
+      })
+      .on("change", guiChanged);
+    folder
+      .addInput(effectController, "mieDirectionalG", {
+        min: 0,
+        max: 1,
+      })
+      .on("change", guiChanged);
+    folder
+      .addInput(effectController, "elevation", {
+        min: 0,
+        max: 90,
+      })
+      .on("change", guiChanged);
+    folder
+      .addInput(effectController, "azimuth", {
+        min: -180,
+        max: 180,
+      })
+      .on("change", guiChanged);
+    folder
+      .addInput(effectController, "exposure", {
+        min: 0,
+        max: 1,
+      })
+      .on("change", guiChanged);
+    guiChanged();
   }
   private lightUpdater: PeriodicUpdater;
 
@@ -93,11 +150,5 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
   }
   public update(dt: number): void {
     this.lightUpdater.update(dt);
-    //this.directionalLight.target.position.add(new Vector3D(10, 0, 10));
-  }
-
-  public refreshHemiIntensity(): void {
-    this.hemiLight.intensity = 0.9;
-    //this.hemiLight.intensity = this.minHemiIntensity + Math.pow(1 - (Math.abs(this._phi - 90) / 90), 0.25) * (this.maxHemiIntensity - this.minHemiIntensity);
   }
 }

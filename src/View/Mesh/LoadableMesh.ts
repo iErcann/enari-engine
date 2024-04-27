@@ -27,7 +27,7 @@ export class LoadableMesh {
 
   public cloneMesh(): THREE.Mesh {
     const original: THREE.Mesh = this.mesh;
-    const cloned = <THREE.Mesh>SkeletonUtils.SkeletonUtils.clone(original);
+    const cloned = <THREE.Mesh>SkeletonUtils.clone(original);
     // SkeletonUtils.clone doesnt seem to keep the animations.
     cloned.animations = original.animations;
     return cloned;
