@@ -92,6 +92,7 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
   private recoilEffect = 0
 
   private bobbingAmount = 0.0002
+  private bobbingRestitutionSpeed = 15
   private moveEffect = Vector3D.ZERO()
   private tempEmitter: Emitter
   public weaponOffset = Vector3D.ZERO()
@@ -110,15 +111,32 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
     this.setFov(this.baseFov)
     if (this.showDebug) {
       const debugUI: DebugUI = this.game.renderer.debugUI
-      debugUI.addVector(this.weaponOffset, 'Viewmodel Offset', new Vector3D(2, 4, 2), 0.01)
-      debugUI.addVector(this.weaponRotation, 'Viewmodel Rotation', new Vector3D(Math.PI, Math.PI, Math.PI))
-      debugUI.addInput(this, 'bobbingAmount' as any, {
+
+      const positionFolder = debugUI.addVector(this.weaponOffset, 'Viewmodel Offset', new Vector3D(2, 4, 2), 0.01)
+      const rotationFolder = debugUI.addVector(
+        this.weaponRotation,
+        'Viewmodel Rotation',
+        new Vector3D(Math.PI, Math.PI, Math.PI)
+      )
+      const bobbingAmount = debugUI.addInput(this, 'bobbingAmount' as any, {
         min: 0.0001,
         max: 0.01,
       })
 
-      debugUI.addMesh(this.playerLight, 'Player PointLight')
-      debugUI.addObject(this.playerLight.color, 'Player PointLight Color')
+      const bobbingRestitution = debugUI.addInput(this, 'bobbingRestitutionSpeed' as any, {
+        min: 0.1,
+        max: 100,
+      })
+
+      debugUI.viewmodelFolder.add(positionFolder)
+      debugUI.viewmodelFolder.add(rotationFolder)
+      debugUI.viewmodelFolder.add(bobbingAmount)
+      debugUI.viewmodelFolder.add(bobbingRestitution)
+
+      const pointLightMesh = debugUI.addMesh(this.playerLight, 'Player PointLight')
+      const pointLightColor = debugUI.addObject(this.playerLight.color, 'Player PointLight Color')
+      debugUI.playerFolder.add(pointLightMesh)
+      debugUI.playerFolder.add(pointLightColor)
     }
   }
 
@@ -154,8 +172,7 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
     }
 
     // Calculate bobbing restitution speed and amount
-    const bobbingRestitutionSpeed = 15
-    const bobbingLerpAmount = Math.min(1, bobbingRestitutionSpeed * dt)
+    const bobbingLerpAmount = Math.min(1, this.bobbingRestitutionSpeed * dt)
 
     // Apply bobbing to each axis of the weapon's rotation
     this.weaponBobbingAcc.x = lerp(this.weaponBobbingAcc.x, 0, bobbingLerpAmount)

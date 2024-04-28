@@ -14,6 +14,9 @@ import { SceneLighting } from './SceneLighting'
 import { ViewmodelRenderer } from './ViewmodelRenderer'
 import { PeriodicUpdater } from '../../Core/PeriodicUpdater'
 import { DebugUI } from '../DebugUI'
+import { SSAOPass, ShaderPass } from 'three/examples/jsm/Addons'
+import { Pass, FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass'
+import { LensDistortionPassGen } from 'three-lens-distortion'
 
 export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
   public scene: THREE.Scene
@@ -56,7 +59,7 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
   }
 
   private createDebugCamera() {
-    this.debugCamera = new THREE.PerspectiveCamera()
+    this.debugCamera = new THREE.PerspectiveCamera(90)
     this.debugCamera.aspect = window.innerWidth / window.innerHeight
     this.debugCamera.updateProjectionMatrix()
     this.debugCameraPosition = new Vector3D(-5.4, 1, 0)
@@ -92,33 +95,48 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
     this.setScissor(left, bottom, width, height)
     this.setScissorTest(true)
   }
+
   private addPostProcess() {
     this.composer = new EffectComposer(this)
+    const postProcessFolder = this.debugUI.addFolder({ title: 'Post Process' })
     this.composer.setSize(window.innerWidth, window.innerHeight)
     this.composer.addPass(new RenderPass(this.scene, this.camera))
 
-    /* const ssaoPass = new SSAOPass(this.scene, this.camera, window.innerWidth, window.innerHeight);
-		ssaoPass.kernelRadius = 3;
-		ssaoPass.minDistance = 0.001;
-		ssaoPass.kernelRadius = 0.13;
-		
-		this.composer.addPass(ssaoPass);
-		this.debugUI.addInput(ssaoPass, 'kernelRadius', { min: 0, max: 32 });
-		this.debugUI.addInput(ssaoPass, 'minDistance', { min: 0.001 , max: 0.02 });
-		this.debugUI.addInput(ssaoPass, 'maxDistance', { min: 0.01 , max: 0.3  });
- */
+    const ssaoFolder = postProcessFolder.addFolder({ title: 'SSAO' })
+    const ssaoPass = new SSAOPass(this.scene, this.camera, window.innerWidth, window.innerHeight)
+    ssaoPass.kernelRadius = 0.5
+    ssaoPass.minDistance = 0.001
+    ssaoPass.maxDistance = 0.081
+    ssaoFolder.addInput(ssaoPass, 'kernelRadius', { min: 0, max: 32 })
+    ssaoFolder.addInput(ssaoPass, 'minDistance', { min: 0.001, max: 0.02 })
+    ssaoFolder.addInput(ssaoPass, 'maxDistance', { min: 0.01, max: 0.3 })
+    //this.composer.addPass(ssaoPass)
 
-    /*     const saoPass = new SAOPass(this.scene, this.camera, false, false);
-    this.composer.addPass(saoPass);
-    this.debugUI.addInput(saoPass.params, "saoBias");
-    this.debugUI.addInput(saoPass.params, "saoIntensity");
-    this.debugUI.addInput(saoPass.params, "saoScale");
-    this.debugUI.addInput(saoPass.params, "saoKernelRadius");
-    this.debugUI.addInput(saoPass.params, "saoMinResolution");
-    this.debugUI.addInput(saoPass.params, "saoBlur");
-    this.debugUI.addInput(saoPass.params, "saoBlurRadius");
-    this.debugUI.addInput(saoPass.params, "saoBlurStdDev");
-    this.debugUI.addInput(saoPass.params, "saoBlurDepthCutoff"); */
+    const lensDistortionFolder = postProcessFolder.addFolder({ title: 'Lens Distortion' })
+    const LensDistortionPass = new LensDistortionPassGen({ THREE, Pass, FullScreenQuad })
+    const params = {
+      distortion: new THREE.Vector2(0.24, 0.24),
+      principalPoint: new THREE.Vector2(0, 0),
+      focalLength: new THREE.Vector2(0.64, 0.64),
+      skew: 0,
+    }
+    const lensDistortionPass = new LensDistortionPass(params)
+    lensDistortionFolder.addInput(params, 'distortion', {
+      x: { min: -1, max: 1 },
+      y: { min: -1, max: 1, inverted: true },
+    })
+    lensDistortionFolder.addInput(params, 'principalPoint', {
+      x: { min: -0.5, max: 0.5 },
+      y: { min: -0.5, max: 0.5, inverted: true },
+    })
+    lensDistortionFolder.addInput(params, 'focalLength', {
+      x: { min: -1, max: 1 },
+      y: { min: -1, max: 1, inverted: true },
+    })
+
+    lensDistortionFolder.addInput(params, 'skew', { min: -Math.PI / 2, max: Math.PI / 2 })
+    this.debugUI.on('change', () => (lensDistortionPass.skew = params.skew))
+    this.composer.addPass(lensDistortionPass)
   }
   private setSkybox(): void {
     const loader = new THREE.TextureLoader()
@@ -132,10 +150,10 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
     this.renderingConfig = {
       resolution: 1,
       hasParticle: true,
-      hasPostProcess: false,
+      hasPostProcess: true,
       hasLight: true,
       hasShadow: true,
-      debugCamera: true,
+      debugCamera: false,
       updateViewmodel: true,
       showViewmodel: true,
       legacyViewmodel: true,
