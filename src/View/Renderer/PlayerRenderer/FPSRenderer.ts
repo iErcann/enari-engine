@@ -91,7 +91,7 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
   public fpsMesh!: FPSMesh
   private recoilEffect = 0
 
-  private bobbingAmount = 0.0002
+  private bobbingAmount = 0.0008
   private bobbingRestitutionSpeed = 15
   private moveEffect = Vector3D.ZERO()
   private tempEmitter: Emitter

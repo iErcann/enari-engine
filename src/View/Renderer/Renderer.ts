@@ -14,7 +14,7 @@ import { SceneLighting } from './SceneLighting'
 import { ViewmodelRenderer } from './ViewmodelRenderer'
 import { PeriodicUpdater } from '../../Core/PeriodicUpdater'
 import { DebugUI } from '../DebugUI'
-import { SSAOPass, ShaderPass } from 'three/examples/jsm/Addons'
+import { BokehPass, SSAOPass, ShaderPass, UnrealBloomPass } from 'three/examples/jsm/Addons'
 import { Pass, FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass'
 import { LensDistortionPassGen } from 'three-lens-distortion'
 
@@ -102,6 +102,26 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
     this.composer.setSize(window.innerWidth, window.innerHeight)
     this.composer.addPass(new RenderPass(this.scene, this.camera))
 
+    const bloomFolder = this.debugUI.addFolder({ title: 'Bloom' })
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85)
+    bloomPass.threshold = 0.71
+    bloomPass.strength = 0.2
+    bloomPass.radius = 0.3
+    bloomFolder.addInput(bloomPass, 'threshold', { min: 0.2, max: 1.5, step: 0.01 })
+    bloomFolder.addInput(bloomPass, 'strength', { min: 0, max: 3 })
+    bloomFolder.addInput(bloomPass, 'radius', { min: 0, max: 1 })
+
+    this.composer.addPass(bloomPass)
+
+    const dofParams = {
+      focus: 0.4,
+      aperture: 0.125,
+      maxblur: 0.001,
+    }
+
+    const bokehPass = new BokehPass(this.scene, this.camera, dofParams)
+    //this.composer.addPass(bokehPass)
+
     const ssaoFolder = postProcessFolder.addFolder({ title: 'SSAO' })
     const ssaoPass = new SSAOPass(this.scene, this.camera, window.innerWidth, window.innerHeight)
     ssaoPass.kernelRadius = 0.5
@@ -110,7 +130,7 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
     ssaoFolder.addInput(ssaoPass, 'kernelRadius', { min: 0, max: 32 })
     ssaoFolder.addInput(ssaoPass, 'minDistance', { min: 0.001, max: 0.02 })
     ssaoFolder.addInput(ssaoPass, 'maxDistance', { min: 0.01, max: 0.3 })
-    //this.composer.addPass(ssaoPass)
+    this.composer.addPass(ssaoPass)
 
     const lensDistortionFolder = postProcessFolder.addFolder({ title: 'Lens Distortion' })
     const LensDistortionPass = new LensDistortionPassGen({ THREE, Pass, FullScreenQuad })
