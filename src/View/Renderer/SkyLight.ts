@@ -16,16 +16,22 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
     super()
     this.renderer = renderer
     const ambientLight = new THREE.AmbientLight()
-    ambientLight.intensity = 0.78
+    ambientLight.intensity = 1.78
     this.renderer.addToRenderer(ambientLight)
 
     // Ambient light
-    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.0)
+    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.3)
     this.hemiLight.color.setHSL(0.59, 0.4, 0.6)
     this.hemiLight.groundColor.setHSL(0.095, 0.2, 0.75)
     this.renderer.addToRenderer(this.hemiLight)
 
-    this.directionalLight = new THREE.DirectionalLight(0xfeaaee, 1.2)
+    const lightInput = this.renderer.debugUI.addInput(this.hemiLight, 'intensity', {
+      min: 0,
+      max: 10,
+    })
+    this.renderer.debugUI.lightFolder.add(lightInput)
+
+    this.directionalLight = new THREE.DirectionalLight(0xfeaaee, 6.2)
     this.directionalLight.shadow.camera.near = 0.1
     this.directionalLight.shadow.camera.far = 500
     this.directionalLight.shadow.camera.right = 150
@@ -38,6 +44,11 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
     this.directionalLight.shadow.bias = -0.001
     this.directionalLight.castShadow = true
     this.directionalLight.shadow.autoUpdate = false
+    const dirLight = this.renderer.debugUI.addInput(this.directionalLight, 'intensity', {
+      min: 0,
+      max: 10,
+    })
+    this.renderer.debugUI.lightFolder.add(dirLight)
 
     this.renderer.addToRenderer(this.directionalLight)
     this.renderer.addToRenderer(this.directionalLight.target)
@@ -61,9 +72,9 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
     this.renderer.addToRenderer(this.sky)
 
     const effectController = {
-      turbidity: 1,
-      rayleigh: 0.09,
-      mieCoefficient: 0.005,
+      turbidity: 16.2,
+      rayleigh: 0.466,
+      mieCoefficient: 0.045,
       mieDirectionalG: 0.7,
       elevation: 64,
       azimuth: 180,

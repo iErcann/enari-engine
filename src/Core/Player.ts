@@ -269,7 +269,7 @@ export class Player extends Pawn implements IUpdatable {
 
       const collisionBody: Ammo.btRigidBody = AmmoInstance!.btRigidBody.prototype.upcast(object)
 
-      const delta = hitPoint.clone().sub(from).multiplyScalar(5)
+      const delta = hitPoint.clone().sub(from).multiplyScalar(25)
       const force = delta.toAmmo()
       collisionBody.applyCentralImpulse(force)
       AmmoInstance!.destroy(force)

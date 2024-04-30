@@ -1,0 +1,24 @@
+{
+    "markers": [
+        {
+            "name": "Shoot_Start",
+            "time": 0.083,
+            "frame": 3
+        },
+        {
+            "name": "Shoot_End",
+            "time": 0.917,
+            "frame": 23
+        },
+        {
+            "name": "Reload_Start",
+            "time": 1.25,
+            "frame": 31
+        },
+        {
+            "name": "Reload_End",
+            "time": 5.583,
+            "frame": 135
+        }
+    ]
+}
