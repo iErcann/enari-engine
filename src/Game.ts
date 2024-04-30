@@ -47,20 +47,20 @@ export class Game implements IUpdatable {
           this.actors.push(ground);
           ground.addToWorld(this.physics);
           this.addToRenderer(ground.mesh)   */
-    /* 
-    for (let j = 1; j < 5; j++) {
+
+    for (let j = 1; j < 10; j++) {
       const cube = new CubeRenderer(
-        new Vector3D(0 + j * 10, 2, 5 * j),
+        new Vector3D(53 - j * 2.5, 2.5 * j, 0),
         new Vector3D(0, 0, 0),
-        new Vector3D(j, j, j),
-        10
+        new Vector3D(2, 2, 2),
+        25
       )
       this.actors.push(cube)
       cube.addToWorld(this.physics)
       this.addToRenderer(cube.mesh)
     }
 
-    for (let j = 1; j < 5; j++) {
+    /*     for (let j = 1; j < 5; j++) {
       const sphere = new SphereRenderer(
         new Vector3D(0 + j * 10, 2, 5 * j),
         new Vector3D(0, 0, 0),
@@ -70,8 +70,8 @@ export class Game implements IUpdatable {
       this.actors.push(sphere)
       sphere.addToWorld(this.physics)
       this.addToRenderer(sphere.mesh)
-    }
- */
+    } */
+
     const mapMesh = this.globalLoadingManager.loadableMeshs.get('Map')! as MapMesh // No need to clone, it's unique.
     mapMesh.init()
     mapMesh.addPhysics(this)

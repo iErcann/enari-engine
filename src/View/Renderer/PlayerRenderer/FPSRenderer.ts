@@ -105,7 +105,7 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
     this.playerLight = new THREE.PointLight(0xe12121, 10, 100)
     this.playerLight.position.add(new Vector3D(3.565, -5, 1))
     this.playerLight.castShadow = true
-    const fpsMesh = <FPSMesh>Game.getInstance().globalLoadingManager.loadableMeshs.get('Usp')!.clone()
+    const fpsMesh = <FPSMesh>Game.getInstance().globalLoadingManager.loadableMeshs.get('AK47')!.clone()
     this.initParticleEmitter()
     this.setMesh(fpsMesh)
     this.setFov(this.baseFov)

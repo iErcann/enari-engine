@@ -11,7 +11,7 @@ import { LoadableMesh } from './LoadableMesh'
 
 export class MapMesh extends LoadableMesh {
   constructor() {
-    super(`pool_day_baked.glb`, 'Map')
+    super(`mg2.glb`, 'Map')
   }
 
   public init() {
@@ -47,7 +47,7 @@ export class MapMesh extends LoadableMesh {
         let cube: TrimeshCollider | undefined = undefined
         // If a child is dynamic, remove it from the mesh and create its own renderer.
         if (isDynamic) {
-          cube = new TrimeshRenderer(mesh, pos, rotation, scale, 100)
+          cube = new TrimeshRenderer(mesh.clone(), pos, rotation, scale, 100)
           game.addToRenderer((cube as TrimeshRenderer).mesh)
           removedMeshs.push(mesh)
         } else {
@@ -61,39 +61,38 @@ export class MapMesh extends LoadableMesh {
       this.mesh.remove(removedMeshs[i])
     }
   }
-
   /*   public addPhysics(game: Game): void {
-      const removedMeshs: Array<THREE.Object3D> = new Array<THREE.Object3D>();
-      this.mesh.traverse(child => {
-        if ((child as any).isMesh) {
-          let mesh = child as THREE.Mesh;
-          mesh.position.y -= 2;
-          let mat = mesh.material as THREE.MeshStandardMaterial;
-          //mat.normalScale = new Vector2D(220, 220);
-          const quat: THREE.Quaternion = mesh.getWorldQuaternion(mesh.quaternion);
-          const rotation = new TQuaternion(quat.x, quat.y, quat.z, quat.w).toVector3D();
-          const pos = mesh.getWorldPosition(mesh.position.clone()) as Vector3D;
-          const scale = mesh.getWorldScale(mesh.scale).clone().multiplyScalar(2) as Vector3D;
-          const mass = 0; Math.random() > 0.5 ? Math.random() * 10 : 0;
-          const isDynamic = false;//= mass != 0;
-          let cube: CubeCollider | undefined = undefined;
-          // If a child is dynamic, remove it from the mesh and create its own renderer.
-          if (isDynamic) {
-            cube = new CubeRenderer(pos, rotation, scale, 100, mesh.material);
-            game.addToRenderer((cube as CubeRenderer).mesh);
-            removedMeshs.push(mesh);
-          } else {
-            cube = new CubeCollider(pos, rotation, scale, 0);
-          }
-          game.actors.push(cube);
-          game.addToWorld(cube);
-  
+    const removedMeshs: Array<THREE.Object3D> = new Array<THREE.Object3D>()
+    this.mesh.traverse((child) => {
+      if ((child as any).isMesh) {
+        let mesh = child as THREE.Mesh
+        mesh.position.y -= 2
+        let mat = mesh.material as THREE.MeshStandardMaterial
+        //mat.normalScale = new Vector2D(220, 220);
+        const quat: THREE.Quaternion = mesh.getWorldQuaternion(mesh.quaternion)
+        const rotation = new TQuaternion(quat.x, quat.y, quat.z, quat.w).toVector3D()
+        const pos = mesh.getWorldPosition(mesh.position.clone()) as Vector3D
+        const scale = mesh.getWorldScale(mesh.scale).clone().multiplyScalar(2) as Vector3D
+        const mass = 0
+        Math.random() > 0.5 ? Math.random() * 10 : 0
+        const isDynamic = false //= mass != 0;
+        let cube: CubeCollider | undefined = undefined
+        // If a child is dynamic, remove it from the mesh and create its own renderer.
+        if (isDynamic) {
+          cube = new CubeRenderer(pos, rotation, scale, 100, mesh.material)
+          game.addToRenderer((cube as CubeRenderer).mesh)
+          removedMeshs.push(mesh)
+        } else {
+          cube = new CubeCollider(pos, rotation, scale, 0)
         }
-      })
-      for (let i = 0; i < removedMeshs.length; i++) {
-        this.mesh.remove(removedMeshs[i]);
+        game.actors.push(cube)
+        game.addToWorld(cube)
       }
-    } */
+    })
+    for (let i = 0; i < removedMeshs.length; i++) {
+      this.mesh.remove(removedMeshs[i])
+    }
+  } */
   public clone(): MapMesh {
     const loadableMesh = new MapMesh()
     loadableMesh.setMesh(this.cloneMesh())

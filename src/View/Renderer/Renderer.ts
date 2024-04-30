@@ -102,9 +102,9 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
     this.composer.setSize(window.innerWidth, window.innerHeight)
     this.composer.addPass(new RenderPass(this.scene, this.camera))
 
-    const bloomFolder = this.debugUI.addFolder({ title: 'Bloom' })
+    const bloomFolder = postProcessFolder.addFolder({ title: 'Bloom' })
     const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85)
-    bloomPass.threshold = 0.71
+    bloomPass.threshold = 0.61
     bloomPass.strength = 0.2
     bloomPass.radius = 0.3
     bloomFolder.addInput(bloomPass, 'threshold', { min: 0.2, max: 1.5, step: 0.01 })

@@ -69,7 +69,7 @@ export class GlobalLoadingManager extends THREE.LoadingManager {
                 ak.register(this.loadableMeshs); */
 
     // try 2 cameras it looks really better
-    const ak = new FPSMesh('fps_mine_sketch_galil.glb', 'AK47', new Vector3D(0, -0.03, 0.07))
+    const ak = new FPSMesh('pickaxe_animated.glb', 'AK47', new Vector3D(0, -0.03, 0.07))
     await ak.load()
     ak.register(this.loadableMeshs)
 

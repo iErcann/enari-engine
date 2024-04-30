@@ -10,11 +10,13 @@ class ObjectProperties {
 export class DebugUI extends Pane {
   public playerFolder: FolderApi
   public viewmodelFolder: FolderApi
+  public lightFolder: FolderApi
 
   constructor() {
     super()
     this.playerFolder = this.addFolder({ title: 'Player' })
     this.viewmodelFolder = this.addFolder({ title: 'Viewmodel' })
+    this.lightFolder = this.addFolder({ title: 'Light' })
   }
   public addVector2(
     vector: Vector2D,
