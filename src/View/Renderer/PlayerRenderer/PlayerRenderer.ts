@@ -27,11 +27,11 @@ export abstract class PlayerRenderer implements IUpdatable {
   }
 
   static createDefaultCamera(): THREE.PerspectiveCamera {
-    return this.createCamera(90)
+    return this.createCamera(100)
   }
 
   static createCamera(fov: number): THREE.PerspectiveCamera {
-    const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.1, 1000)
     return camera
   }
 

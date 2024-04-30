@@ -1,65 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Enari FPS Engine</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Enari FPS Engine</title>
+    <style>
+      html,
+      body,
+      #root {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: black;
+      }
 
-  <style>
-    html,
-    body,
-    #root {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
+      #fps {
+        position: absolute;
+        background: rgba(0, 0, 0, 0);
+        top: 0px;
+        left: 20px;
+        font-weight: 400;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: white;
+      }
 
-    #fps {
-      position: absolute;
-      background: rgba(0, 0, 0, 0);
-      top: 0px;
-      left: 20px;
-      font-weight: 400;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      color: white;
-    }
+      #crosshair {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 5%;
+        z-index: 1;
+      }
 
-    #overlay {
-      height: 100%;
-      width: 100%;
-      pointer-events: none;
-      position: absolute;
-      top: 0%;
-      z-index: 1;
-      box-shadow: inset 0 0 120px #000, inset 0 0 80px #000, inset 0 0 40px #000;
-    }
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+      #loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        color: white;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        animation: glitch 10.45s infinite;
+      }
+      #loadingImg {
+        width: 30%;
+        border-radius: 5%;
+        position: relative;
+      }
 
-    #crosshair {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 5%;
-    }
+      @keyframes glitch {
+        0% {
+          transform: translate(0);
+        }
+        5% {
+          transform: translate(-5px, 5px) rotate(1deg);
+          opacity: 1;
+        }
+        10% {
+          transform: translate(-10px, -5px) rotate(2deg);
+          opacity: 0.8;
+        }
+        15% {
+          transform: translate(5px, 10px) rotate(-1deg);
+        }
+        20% {
+          transform: translate(-5px, -10px) rotate(2deg);
+          opacity: 0.2;
+        }
+        25% {
+          transform: translate(0) rotate(-1deg);
+        }
+        30% {
+          transform: translate(5px, 5px) rotate(-2deg);
+        }
+        35% {
+          transform: translate(-5px, 10px) rotate(1deg);
+        }
+        40% {
+          transform: translate(10px, -5px) rotate(-2deg);
+        }
+        45% {
+          transform: translate(-10px, 5px) rotate(1deg);
+        }
+        50% {
+          transform: translate(0) rotate(2deg);
+          opacity: 0.4;
+        }
+        55% {
+          transform: translate(5px, -10px) rotate(-1deg);
+        }
+        60% {
+          transform: translate(-5px, 5px) rotate(2deg);
+        }
+        65% {
+          transform: translate(10px, 5px) rotate(-1deg);
+        }
+        70% {
+          transform: translate(-10px, -5px) rotate(2deg);
+        }
+        75% {
+          transform: translate(0) rotate(-2deg);
+          opacity: 0.8;
+        }
+        80% {
+          transform: translate(5px, 10px) rotate(1deg);
+          opacity: 0.6;
+        }
+        85% {
+          transform: translate(-5px, -10px) rotate(-2deg);
+        }
+        90% {
+          transform: translate(-10px, 5px) rotate(1deg);
+          opacity: 0.4;
+        }
+        95% {
+          transform: translate(10px, -5px) rotate(-2deg);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
+    </style>
+  </head>
 
-    canvas {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-</head>
-
-<body>
-  <p id="fps"></p>
-    <div id="overlay"></div>
- <img id="crosshair" src="crosshair.png" alt="Crosshair">
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+  <body>
+    <p id="fps"></p>
+    <!--  -->
+    <div id="loading">
+      <h1>Loading...</h1>
+      <img src="./public/valveLoading.webp" alt="" id="loadingImg" />
+    </div>
+    <img id="crosshair" src="crosshair.png" alt="Crosshair" />
+    <audio autoplay>
+      <source src="./public/valveLoading.mp3" type="audio/mpeg" />
+    </audio>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

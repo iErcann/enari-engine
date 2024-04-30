@@ -86,7 +86,7 @@ export class PlayerWrapper {
   }
 
   static default(): PlayerWrapper {
-    const player = new Player(new Vector3D(0, 10, 0))
+    const player = new Player(new Vector3D(53, 5, 8))
     const controller = new PlayerController(player)
     const fpsRenderer = new FPSRenderer(player)
     const cameraManager = new FPSCameraManager(player, fpsRenderer.camera)
