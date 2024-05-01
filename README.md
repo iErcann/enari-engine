@@ -48,8 +48,4 @@ Minecraft Pickaxe - LeoPasc02
 https://skfb.ly/6YG7W
 
 
-Minecraft Pickaxe - LeoPasc02
-https://skfb.ly/6YG7W
-
-
 "Minecraft Wood Shop & Mill" (https://skfb.ly/67YUT) by BlackSong is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).

@@ -73,13 +73,13 @@ export class GlobalLoadingManager extends THREE.LoadingManager {
     await ak.load()
     ak.register(this.loadableMeshs)
 
-    const usp = new FPSMesh('fps_mine_sketch_compressed.glb', 'Usp', new Vector3D(-0.09, 0.26, 0.35))
+    /*     const usp = new FPSMesh('fps_mine_sketch_compressed.glb', 'Usp', new Vector3D(-0.09, 0.26, 0.35))
     await usp.load()
     usp.register(this.loadableMeshs)
 
     const m9 = new FPSMesh('fps_mine_sketch_m9.glb', 'Knife')
     await m9.load()
-    m9.register(this.loadableMeshs)
+    m9.register(this.loadableMeshs) */
 
     const bullet = new LoadableMesh('9mm2douille.glb', 'Bullet')
     await bullet.load()
