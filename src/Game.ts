@@ -49,12 +49,7 @@ export class Game implements IUpdatable {
           this.addToRenderer(ground.mesh)   */
 
     for (let j = 1; j < 10; j++) {
-      const cube = new CubeRenderer(
-        new Vector3D(53 - j * 2.5, 2.5 * j, 0),
-        new Vector3D(0, 0, 0),
-        new Vector3D(2, 2, 2),
-        25
-      )
+      const cube = new CubeRenderer(new Vector3D(10 + j * 2.5, 5, 46), new Vector3D(0, 0, 0), new Vector3D(2, 2, 2), 25)
       this.actors.push(cube)
       cube.addToWorld(this.physics)
       this.addToRenderer(cube.mesh)

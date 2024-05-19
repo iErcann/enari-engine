@@ -16,11 +16,11 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
     super()
     this.renderer = renderer
     const ambientLight = new THREE.AmbientLight()
-    ambientLight.intensity = 1.78
+    ambientLight.intensity = 0.78
     this.renderer.addToRenderer(ambientLight)
 
     // Ambient light
-    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.3)
+    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1)
     this.hemiLight.color.setHSL(0.59, 0.4, 0.6)
     this.hemiLight.groundColor.setHSL(0.095, 0.2, 0.75)
     this.renderer.addToRenderer(this.hemiLight)
@@ -72,9 +72,9 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
     this.renderer.addToRenderer(this.sky)
 
     const effectController = {
-      turbidity: 16.2,
-      rayleigh: 0.466,
-      mieCoefficient: 0.045,
+      turbidity: 1,
+      rayleigh: 0.09,
+      mieCoefficient: 0.005,
       mieDirectionalG: 0.7,
       elevation: 64,
       azimuth: 180,

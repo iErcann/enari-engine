@@ -11,7 +11,7 @@ import { LoadableMesh } from './LoadableMesh'
 
 export class MapMesh extends LoadableMesh {
   constructor() {
-    super(`mg2.glb`, 'Map')
+    super(`pool_day_baked.glb`, 'Map')
   }
 
   public init() {

@@ -13,11 +13,11 @@ export class CubeRenderer extends CubeCollider implements IUpdatable {
     material?: THREE.Material | THREE.Material[]
   ) {
     super(position, rotation, size, mass)
-    const texture = new THREE.TextureLoader().load('grass.jpg')
+    const texture = new THREE.TextureLoader().load('CubeTexture.png')
     texture.wrapS = THREE.RepeatWrapping
     texture.wrapT = THREE.RepeatWrapping
 
-    //const normal = new THREE.TextureLoader().load('NormalMap (1).png')
+    const normal = new THREE.TextureLoader().load('CubeNormal.png')
 
     const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(size.x, size.y, size.z)
 
@@ -25,7 +25,7 @@ export class CubeRenderer extends CubeCollider implements IUpdatable {
 
     if (!material) {
       _material = new THREE.MeshStandardMaterial({
-        // normalMap: normal,
+        normalMap: normal,
         map: texture,
         emissive: 0x000000,
         metalness: 0,
