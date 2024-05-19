@@ -95,7 +95,7 @@ export class FPSRenderer extends PlayerRenderer implements IUpdatable {
   private bobbingRestitutionSpeed = 15
   private moveEffect = Vector3D.ZERO()
   private tempEmitter: Emitter
-  public weaponOffset = Vector3D.ZERO()
+  public weaponOffset = new Vector3D(0, 30, 0)
   public weaponRotation = Vector3D.ZERO()
   private playerLight!: THREE.Light
   private weaponBobbingAcc = Vector3D.ZERO()

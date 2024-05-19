@@ -8,14 +8,19 @@ import { CubeRenderer } from '../Renderer/CubeRenderer'
 import { TrimeshRenderer } from '../Renderer/TrimeshRenderer'
 import { FakeSpotLight } from './FakeSpotLight'
 import { LoadableMesh } from './LoadableMesh'
+import { AnimatedLoadableMesh } from './AnimatedLoadableMesh'
 
-export class MapMesh extends LoadableMesh {
+export class MapMesh extends AnimatedLoadableMesh {
   constructor() {
-    super(`pool_day_baked.glb`, 'Map')
+    super(`backroom.glb`, 'Map')
   }
 
   public init() {
     super.init()
+    this.playAllAnimation()
+  }
+  public update(dt: number) {
+    this.mixer.update(dt)
   }
   public addPhysics(game: Game): void {
     const removedMeshs: Array<THREE.Object3D> = new Array<THREE.Object3D>()
@@ -93,6 +98,11 @@ export class MapMesh extends LoadableMesh {
       this.mesh.remove(removedMeshs[i])
     }
   } */
+  public playAllAnimations(): void {
+    this.mesh.animations.forEach((clip) => {
+      this.mixer.clipAction(clip).play()
+    })
+  }
   public clone(): MapMesh {
     const loadableMesh = new MapMesh()
     loadableMesh.setMesh(this.cloneMesh())

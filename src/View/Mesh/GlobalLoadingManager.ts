@@ -62,6 +62,7 @@ export class GlobalLoadingManager extends THREE.LoadingManager {
 
     const mapmesh = new MapMesh()
     await mapmesh.load()
+    mapmesh.playAllAnimations()
     mapmesh.register(this.loadableMeshs)
 
     const ak = new FPSMesh('fps_mine_sketch_galil.glb', 'AK47')

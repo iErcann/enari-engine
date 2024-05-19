@@ -20,14 +20,14 @@ export class SkyLight extends THREE.Object3D implements IUpdatable {
     this.renderer.addToRenderer(ambientLight)
 
     // Ambient light
-    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1)
+    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 22)
     this.hemiLight.color.setHSL(0.59, 0.4, 0.6)
     this.hemiLight.groundColor.setHSL(0.095, 0.2, 0.75)
     this.renderer.addToRenderer(this.hemiLight)
 
     const lightInput = this.renderer.debugUI.addInput(this.hemiLight, 'intensity', {
       min: 0,
-      max: 10,
+      max: 100,
     })
     this.renderer.debugUI.lightFolder.add(lightInput)
 

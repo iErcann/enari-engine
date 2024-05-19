@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Enari FPS Engine</title>
+    <title>Backrooms</title>
 
     <style>
       html,
@@ -19,6 +19,7 @@
       }
 
       #fps {
+        display: none;
         position: absolute;
         background: rgba(0, 0, 0, 0);
         top: 0px;
@@ -65,6 +66,9 @@
         position: relative;
       }
 
+      .tp-dfwv {
+        display: none;
+      }
       @keyframes glitch {
         0% {
           transform: translate(0);
@@ -144,10 +148,10 @@
     <p id="fps"></p>
     <!--  -->
     <div id="loading">
-      <h1>Loading...</h1>
+      <h1>Entering the backrooms...</h1>
       <img src="./public/valveLoading.webp" alt="" id="loadingImg" />
+      <a href="https://github.com/iErcann/enari-engine"> Repo github.com/iErcann/enari-engine </a>
     </div>
-    <img id="crosshair" src="crosshair.png" alt="Crosshair" />
     <audio autoplay>
       <source src="./public/valveLoading.mp3" type="audio/mpeg" />
     </audio>

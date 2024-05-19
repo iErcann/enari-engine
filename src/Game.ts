@@ -48,12 +48,12 @@ export class Game implements IUpdatable {
           ground.addToWorld(this.physics);
           this.addToRenderer(ground.mesh)   */
 
-    for (let j = 1; j < 10; j++) {
-      const cube = new CubeRenderer(new Vector3D(10 + j * 2.5, 5, 46), new Vector3D(0, 0, 0), new Vector3D(2, 2, 2), 25)
-      this.actors.push(cube)
-      cube.addToWorld(this.physics)
-      this.addToRenderer(cube.mesh)
-    }
+    // for (let j = 1; j < 10; j++) {
+    //   const cube = new CubeRenderer(new Vector3D(10 + j * 2.5, 5, 46), new Vector3D(0, 0, 0), new Vector3D(2, 2, 2), 25)
+    //   this.actors.push(cube)
+    //   cube.addToWorld(this.physics)
+    //   this.addToRenderer(cube.mesh)
+    // }
 
     /*     for (let j = 1; j < 5; j++) {
       const sphere = new SphereRenderer(
@@ -67,11 +67,13 @@ export class Game implements IUpdatable {
       this.addToRenderer(sphere.mesh)
     } */
 
-    const mapMesh = this.globalLoadingManager.loadableMeshs.get('Map')! as MapMesh // No need to clone, it's unique.
-    mapMesh.init()
-    mapMesh.addPhysics(this)
-    this.addToRenderer(mapMesh.mesh)
+    this.mapMesh = this.globalLoadingManager.loadableMeshs.get('Map')! as MapMesh // No need to clone, it's unique.
+    this.mapMesh.init()
+    this.mapMesh.addPhysics(this)
+    this.addToRenderer(this.mapMesh.mesh)
   }
+  private mapMesh!: MapMesh
+
   public static getInstance(): Game {
     if (!Game.game) {
       Game.game = new Game()
@@ -110,10 +112,10 @@ export class Game implements IUpdatable {
     for (let i = 0; i < this.actors.length; i++) {
       this.actors[i].update(dt) // TODO: Put players inside this array
     }
-
     this.currentPlayer.player.update(dt) // Physics
     this.physics.update(dt)
     this.renderer.update(dt)
+    this.mapMesh.update(dt)
     this.lastUpdateTS = now
     requestAnimationFrame(this.update)
   }
