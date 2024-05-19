@@ -1,7 +1,10 @@
 ## Enari Engine: Browser-based CS-Style Game
 ### Online Version
-Explore the game here: [Enari Engine 🔗](https://enari-engine.vercel.app/)
- 
+Explore the game here: 
+- [Main Demo 🔗](https://enari-engine.vercel.app/)
+- [Minecraft Like🔗](https://enari-engine-git-minecraft-iercanns-projects.vercel.app/)
+- [Unrecord Demo (experimental)🔗](https://enari-engine-git-unrecord-iercanns-projects.vercel.app)
+
 ![image](https://github.com/iErcann/enari-engine/assets/25112067/f402a797-91cd-416b-b057-40a832151081)
 
  
@@ -17,13 +20,11 @@ Explore the game here: [Enari Engine 🔗](https://enari-engine.vercel.app/)
 - **Escape**: Leave mouse lock
 - **R**: Reload
 
-
- ## You like this project or want to talk about Three.js games ? 
-Discord  https://discord.gg/aEBXPtFwgU 👀
-
+ 
  
  **I updated the project but it has old Three.js dependencies + Ammo.js has a better alternative now (Rapier.js)**
 
+ 
  
  ### Map loading
  Can load .glb maps
@@ -32,20 +33,42 @@ Discord  https://discord.gg/aEBXPtFwgU 👀
 
 ### Support gun animations
 ![image](https://github.com/iErcann/enari-engine/assets/25112067/2807dc41-bee1-43ca-b775-50e90897f202)
-  
+ 
+#### Exporting animation keys in JSON 
+ https://github.com/grow/blender-animation-marker-export
 
  
-### Other Three.js Project 
-https://github.com/iErcann/NotRoblox
-
-
 
 ## Credits
+### Code
+- **UI (Tweakpane)**: [Tweakpane](https://github.com/cocopon/tweakpane)
+- **Three.js**: [Three.js](https://github.com/mrdoob/three.js)
+- **Ammo.js Typed**: [Ammo.js Typed](https://www.npmjs.com/package/ammojs-typed)
+- **Particles**: [three-nebula](https://github.com/creativelifeform/three-nebula)
+- **Trimesh Collider code**: [enable3d](https://github.com/enable3d/enable3d)
+
+
+### Assets
 Pool Map - Vince_Crusty
 https://skfb.ly/opsCs 
 
 Minecraft Pickaxe - LeoPasc02
 https://skfb.ly/6YG7W
 
-
 "Minecraft Wood Shop & Mill" (https://skfb.ly/67YUT) by BlackSong is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+ 
+
+
+
+ 
+## [NotBlox](https://github.com/iErcann/NotRoblox) : Another Three.js Project but with Multiplayer  
+![Demo NotBlox](https://raw.githubusercontent.com/iErcann/Notblox/main/GameScreen1.webp)
+
+
+
+ ## You like this project or want to talk about Three.js games ? 
+Discord  https://discord.gg/aEBXPtFwgU 👀
+
+
+ 
