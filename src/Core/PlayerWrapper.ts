@@ -94,7 +94,7 @@ export class PlayerWrapper {
     return new PlayerWrapper(player, controller, fpsRenderer, cameraManager)
   }
   static defaultNoRenderer(): PlayerWrapper {
-    const player = new Player(new Vector3D(20, 10, 0))
+    const player = new Player(new Vector3D(53, 2, 10.59))
     const controller = new PlayerController(player)
     return new PlayerWrapper(player, controller, undefined, undefined)
   }
