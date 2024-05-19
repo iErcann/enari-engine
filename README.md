@@ -46,7 +46,7 @@ Explore the game here:
 - **Ammo.js Typed**: [Ammo.js Typed](https://www.npmjs.com/package/ammojs-typed)
 - **Particles**: [three-nebula](https://github.com/creativelifeform/three-nebula)
 - **Trimesh Collider code**: [enable3d](https://github.com/enable3d/enable3d)
-
+- **Bunny hop modification** [bunny hop webgl](https://github.com/squeek502/bunnyhop-webgl)
 
 ### Assets
 Pool Map - Vince_Crusty
