@@ -1,0 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DATA_TEXTURE_SIZE = void 0;
+var DATA_TEXTURE_SIZE = 256;
+exports.DATA_TEXTURE_SIZE = DATA_TEXTURE_SIZE;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NyYy9yZW5kZXJlci9HUFVSZW5kZXJlci9jb21tb24vVGV4dHVyZUF0bGFzL2NvbnN0YW50cy5qcyJdLCJuYW1lcyI6WyJEQVRBX1RFWFRVUkVfU0laRSJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQU8sSUFBTUEsaUJBQWlCLEdBQUcsR0FBMUIiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgREFUQV9URVhUVVJFX1NJWkUgPSAyNTY7XG4iXX0=

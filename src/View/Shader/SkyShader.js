@@ -13,9 +13,9 @@
  * Three.js integration by zz85 http://twitter.com/blurspline
  * Node.js module implementation by Danila Loginov https://loginov.rocks
  */
+import * as THREE from "three";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SkyShader = void 0;
-var THREE = require("three");
 exports.SkyShader = {
     uniforms: {
         luminance: { value: 1 },

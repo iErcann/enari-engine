@@ -1,3 +1,13 @@
+# Enari Engine
+
+KellyCode Feb 1, 2025  
+
+Converted everything ts to vanilla js,  
+Removed all precompile dependencies,  
+Just for fun
+
+---
+
 # Enari Engine: Browser-based CS-Style Game
 ## Online Versions
 ### Main version

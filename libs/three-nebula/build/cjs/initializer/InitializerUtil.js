@@ -1,0 +1,54 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _three = require("../core/three/");
+
+var particleEuler = new _three.Euler();
+var _default = {
+  particleEuler: null,
+
+  /**
+   * Loops through the initializers array and calls each initializer's initialize method
+   * on the supplied particle. This sets the particle's initial properties.
+   *
+   * @see {@link '../emitter/Emitter'} setupParticle
+   * @param {Emitter} emitter - The emitter that has called this method
+   * @param {Particle} particle - The particle that has just been created
+   * @param {array<Initializer>} initializers - All of the emitter's initializers
+   * @return void
+   */
+  initialize: function initialize(emitter, particle, initializers) {
+    var i = initializers.length;
+
+    while (i--) {
+      initializers[i].init(emitter, particle);
+    }
+
+    emitter.bindEmitter && this.bindEmitter(emitter, particle);
+  },
+
+  /**
+   * Ensures that the emitter's position, velocity and accleration are added
+   * to each created particle.
+   *
+   * @param {Emitter} emitter - The emitter that is emitting the particles
+   * @param {Particle} particle - The newly created particle
+   * @return void
+   */
+  bindEmitter: function bindEmitter(emitter, particle) {
+    var _emitter$rotation = emitter.rotation,
+        x = _emitter$rotation.x,
+        y = _emitter$rotation.y,
+        z = _emitter$rotation.z;
+    particle.position.add(emitter.position);
+    particle.velocity.add(emitter.velocity);
+    particle.acceleration.add(emitter.acceleration);
+    particle.velocity.applyEuler(particleEuler.set(x, y, z));
+  }
+};
+exports["default"] = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9pbml0aWFsaXplci9Jbml0aWFsaXplclV0aWwuanMiXSwibmFtZXMiOlsicGFydGljbGVFdWxlciIsIkV1bGVyIiwiaW5pdGlhbGl6ZSIsImVtaXR0ZXIiLCJwYXJ0aWNsZSIsImluaXRpYWxpemVycyIsImkiLCJsZW5ndGgiLCJpbml0IiwiYmluZEVtaXR0ZXIiLCJyb3RhdGlvbiIsIngiLCJ5IiwieiIsInBvc2l0aW9uIiwiYWRkIiwidmVsb2NpdHkiLCJhY2NlbGVyYXRpb24iLCJhcHBseUV1bGVyIiwic2V0Il0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUE7O0FBRUEsSUFBTUEsYUFBYSxHQUFHLElBQUlDLFlBQUosRUFBdEI7ZUFFZTtBQUNiRCxFQUFBQSxhQUFhLEVBQUUsSUFERjs7QUFFYjtBQUNGO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNFRSxFQUFBQSxVQUFVLEVBQUUsb0JBQVNDLE9BQVQsRUFBa0JDLFFBQWxCLEVBQTRCQyxZQUE1QixFQUEwQztBQUNwRCxRQUFJQyxDQUFDLEdBQUdELFlBQVksQ0FBQ0UsTUFBckI7O0FBRUEsV0FBT0QsQ0FBQyxFQUFSLEVBQVk7QUFDVkQsTUFBQUEsWUFBWSxDQUFDQyxDQUFELENBQVosQ0FBZ0JFLElBQWhCLENBQXFCTCxPQUFyQixFQUE4QkMsUUFBOUI7QUFDRDs7QUFFREQsSUFBQUEsT0FBTyxDQUFDTSxXQUFSLElBQXVCLEtBQUtBLFdBQUwsQ0FBaUJOLE9BQWpCLEVBQTBCQyxRQUExQixDQUF2QjtBQUNELEdBcEJZOztBQXNCYjtBQUNGO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0VLLEVBQUFBLFdBQVcsRUFBRSxxQkFBU04sT0FBVCxFQUFrQkMsUUFBbEIsRUFBNEI7QUFBQSw0QkFHbkNELE9BSG1DLENBRXJDTyxRQUZxQztBQUFBLFFBRXpCQyxDQUZ5QixxQkFFekJBLENBRnlCO0FBQUEsUUFFdEJDLENBRnNCLHFCQUV0QkEsQ0FGc0I7QUFBQSxRQUVuQkMsQ0FGbUIscUJBRW5CQSxDQUZtQjtBQUt2Q1QsSUFBQUEsUUFBUSxDQUFDVSxRQUFULENBQWtCQyxHQUFsQixDQUFzQlosT0FBTyxDQUFDVyxRQUE5QjtBQUNBVixJQUFBQSxRQUFRLENBQUNZLFFBQVQsQ0FBa0JELEdBQWxCLENBQXNCWixPQUFPLENBQUNhLFFBQTlCO0FBQ0FaLElBQUFBLFFBQVEsQ0FBQ2EsWUFBVCxDQUFzQkYsR0FBdEIsQ0FBMEJaLE9BQU8sQ0FBQ2MsWUFBbEM7QUFDQWIsSUFBQUEsUUFBUSxDQUFDWSxRQUFULENBQWtCRSxVQUFsQixDQUE2QmxCLGFBQWEsQ0FBQ21CLEdBQWQsQ0FBa0JSLENBQWxCLEVBQXFCQyxDQUFyQixFQUF3QkMsQ0FBeEIsQ0FBN0I7QUFDRDtBQXZDWSxDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgRXVsZXIgfSBmcm9tICcuLi9jb3JlL3RocmVlLyc7XG5cbmNvbnN0IHBhcnRpY2xlRXVsZXIgPSBuZXcgRXVsZXIoKTtcblxuZXhwb3J0IGRlZmF1bHQge1xuICBwYXJ0aWNsZUV1bGVyOiBudWxsLFxuICAvKipcbiAgICogTG9vcHMgdGhyb3VnaCB0aGUgaW5pdGlhbGl6ZXJzIGFycmF5IGFuZCBjYWxscyBlYWNoIGluaXRpYWxpemVyJ3MgaW5pdGlhbGl6ZSBtZXRob2RcbiAgICogb24gdGhlIHN1cHBsaWVkIHBhcnRpY2xlLiBUaGlzIHNldHMgdGhlIHBhcnRpY2xlJ3MgaW5pdGlhbCBwcm9wZXJ0aWVzLlxuICAgKlxuICAgKiBAc2VlIHtAbGluayAnLi4vZW1pdHRlci9FbWl0dGVyJ30gc2V0dXBQYXJ0aWNsZVxuICAgKiBAcGFyYW0ge0VtaXR0ZXJ9IGVtaXR0ZXIgLSBUaGUgZW1pdHRlciB0aGF0IGhhcyBjYWxsZWQgdGhpcyBtZXRob2RcbiAgICogQHBhcmFtIHtQYXJ0aWNsZX0gcGFydGljbGUgLSBUaGUgcGFydGljbGUgdGhhdCBoYXMganVzdCBiZWVuIGNyZWF0ZWRcbiAgICogQHBhcmFtIHthcnJheTxJbml0aWFsaXplcj59IGluaXRpYWxpemVycyAtIEFsbCBvZiB0aGUgZW1pdHRlcidzIGluaXRpYWxpemVyc1xuICAgKiBAcmV0dXJuIHZvaWRcbiAgICovXG4gIGluaXRpYWxpemU6IGZ1bmN0aW9uKGVtaXR0ZXIsIHBhcnRpY2xlLCBpbml0aWFsaXplcnMpIHtcbiAgICBsZXQgaSA9IGluaXRpYWxpemVycy5sZW5ndGg7XG5cbiAgICB3aGlsZSAoaS0tKSB7XG4gICAgICBpbml0aWFsaXplcnNbaV0uaW5pdChlbWl0dGVyLCBwYXJ0aWNsZSk7XG4gICAgfVxuXG4gICAgZW1pdHRlci5iaW5kRW1pdHRlciAmJiB0aGlzLmJpbmRFbWl0dGVyKGVtaXR0ZXIsIHBhcnRpY2xlKTtcbiAgfSxcblxuICAvKipcbiAgICogRW5zdXJlcyB0aGF0IHRoZSBlbWl0dGVyJ3MgcG9zaXRpb24sIHZlbG9jaXR5IGFuZCBhY2NsZXJhdGlvbiBhcmUgYWRkZWRcbiAgICogdG8gZWFjaCBjcmVhdGVkIHBhcnRpY2xlLlxuICAgKlxuICAgKiBAcGFyYW0ge0VtaXR0ZXJ9IGVtaXR0ZXIgLSBUaGUgZW1pdHRlciB0aGF0IGlzIGVtaXR0aW5nIHRoZSBwYXJ0aWNsZXNcbiAgICogQHBhcmFtIHtQYXJ0aWNsZX0gcGFydGljbGUgLSBUaGUgbmV3bHkgY3JlYXRlZCBwYXJ0aWNsZVxuICAgKiBAcmV0dXJuIHZvaWRcbiAgICovXG4gIGJpbmRFbWl0dGVyOiBmdW5jdGlvbihlbWl0dGVyLCBwYXJ0aWNsZSkge1xuICAgIGNvbnN0IHtcbiAgICAgIHJvdGF0aW9uOiB7IHgsIHksIHogfSxcbiAgICB9ID0gZW1pdHRlcjtcblxuICAgIHBhcnRpY2xlLnBvc2l0aW9uLmFkZChlbWl0dGVyLnBvc2l0aW9uKTtcbiAgICBwYXJ0aWNsZS52ZWxvY2l0eS5hZGQoZW1pdHRlci52ZWxvY2l0eSk7XG4gICAgcGFydGljbGUuYWNjZWxlcmF0aW9uLmFkZChlbWl0dGVyLmFjY2VsZXJhdGlvbik7XG4gICAgcGFydGljbGUudmVsb2NpdHkuYXBwbHlFdWxlcihwYXJ0aWNsZUV1bGVyLnNldCh4LCB5LCB6KSk7XG4gIH0sXG59O1xuIl19

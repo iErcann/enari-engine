@@ -1,0 +1,54 @@
+{
+    "markers": [
+        {
+            "name": "Reload_Start",
+            "time": -0.033,
+            "frame": 0
+        },
+        {
+            "name": "Reload_End",
+            "time": 6.633,
+            "frame": 200
+        },
+        {
+            "name": "Switch_Start",
+            "time": 6.8,
+            "frame": 205
+        },
+        {
+            "name": "Switch_End",
+            "time": 8.5,
+            "frame": 256
+        },
+        {
+            "name": "Shoot_Start",
+            "time": 8.8,
+            "frame": 265
+        },
+        {
+            "name": "Shoot_End",
+            "time": 9.4,
+            "frame": 283
+        },
+        {
+            "name": "Move_Start",
+            "time": 9.567,
+            "frame": 288
+        },
+        {
+            "name": "Move_End",
+            "time": 10.033,
+            "frame": 302
+        },
+        {
+            "name": "Idle_Start",
+            "time": 10.367,
+            "frame": 312
+        },
+        {
+            "name": "Idle_End",
+            "time": 16.533,
+            "frame": 497
+        }
+    ]
+}

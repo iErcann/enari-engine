@@ -1,0 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SIZE_ATTENUATION_FACTOR = void 0;
+var SIZE_ATTENUATION_FACTOR = '600.0';
+exports.SIZE_ATTENUATION_FACTOR = SIZE_ATTENUATION_FACTOR;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NyYy9yZW5kZXJlci9HUFVSZW5kZXJlci9jb21tb24vc2hhZGVycy9jb25zdGFudHMuanMiXSwibmFtZXMiOlsiU0laRV9BVFRFTlVBVElPTl9GQUNUT1IiXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFPLElBQU1BLHVCQUF1QixHQUFHLE9BQWhDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IFNJWkVfQVRURU5VQVRJT05fRkFDVE9SID0gJzYwMC4wJztcbiJdfQ==

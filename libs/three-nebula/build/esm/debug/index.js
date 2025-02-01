@@ -1,0 +1,3 @@
+export { default as Debug } from './Debug';
+export { default as log } from './log';
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9kZWJ1Zy9pbmRleC5qcyJdLCJuYW1lcyI6WyJkZWZhdWx0IiwiRGVidWciLCJsb2ciXSwibWFwcGluZ3MiOiJBQUFBLFNBQVNBLE9BQU8sSUFBSUMsS0FBcEIsUUFBaUMsU0FBakM7QUFDQSxTQUFTRCxPQUFPLElBQUlFLEdBQXBCLFFBQStCLE9BQS9CIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IHsgZGVmYXVsdCBhcyBEZWJ1ZyB9IGZyb20gJy4vRGVidWcnO1xuZXhwb3J0IHsgZGVmYXVsdCBhcyBsb2cgfSBmcm9tICcuL2xvZyc7XG4iXX0=
