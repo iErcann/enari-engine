@@ -4,7 +4,8 @@ KellyCode Feb 1, 2025
 
 Converted everything ts to vanilla js,  
 Removed all precompile dependencies,  
-Just for fun
+Runs without all the build hoopla and  
+just makes it easier to work with.  
 
 ---
 
