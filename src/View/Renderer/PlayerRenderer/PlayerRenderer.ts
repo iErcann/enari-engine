@@ -17,7 +17,7 @@ export abstract class PlayerRenderer implements IUpdatable {
   protected game: Game
   protected showDebug = true
   protected showDebugHitscan = false
-  protected baseFov = 90
+  protected baseFov = 80
 
   abstract hide(): void
   abstract show(): void
@@ -36,7 +36,7 @@ export abstract class PlayerRenderer implements IUpdatable {
   }
 
   constructor(player: Player) {
-    this.camera = PlayerRenderer.createDefaultCamera()
+    this.camera = PlayerRenderer.createCamera(this.baseFov)
     this.player = player
     this.game = Game.getInstance()
     if (this.showDebug) {
