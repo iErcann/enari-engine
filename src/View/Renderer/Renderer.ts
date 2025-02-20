@@ -170,7 +170,7 @@ export class Renderer extends THREE.WebGLRenderer implements IUpdatable {
     this.renderingConfig = {
       resolution: 1,
       hasParticle: true,
-      hasPostProcess: true,
+      hasPostProcess: false,
       hasLight: true,
       hasShadow: true,
       debugCamera: false,
