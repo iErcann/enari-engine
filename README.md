@@ -1,4 +1,18 @@
 # Enari Engine: Browser-based CS-Style Game
+
+## 🎥 How I Did It — Tutorial
+
+Check out my tutorial on YouTube explaining how I build projects like this and the steps I followed:
+
+[![Watch the video](https://img.youtube.com/vi/to032deYr-Q/0.jpg)](https://youtu.be/to032deYr-Q)
+
+📺 **[Watch on YouTube](https://youtu.be/to032deYr-Q)**
+
+
+NOTE : I remade this entire project under:
+
+https://www.notstrike.online
+
 ## Online Versions
 ### Main version
  [Main Demo 🔗](https://enari-engine.vercel.app/)
