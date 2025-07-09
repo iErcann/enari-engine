@@ -9,9 +9,15 @@ Check out my tutorial on YouTube explaining how I build projects like this and t
 📺 **[Watch on YouTube](https://youtu.be/to032deYr-Q)**
 
 
-NOTE : I remade this entire project under:
+## ⚠️ Note
 
-https://www.notstrike.online
+I've completely remade this project with improvements and easier modifiability under:  
+
+🌐 [https://www.notstrike.online](https://www.notstrike.online)  
+
+Get the new version's source code here (more advanced and way easier than Enari to modify!):  
+
+🔗 [https://iercan.gumroad.com/l/wcwye](https://iercan.gumroad.com/l/wcwye)  
 
 ## Online Versions
 ### Main version
